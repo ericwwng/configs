@@ -1,4 +1,4 @@
-# Alacritty
+# Alacritty Configuration
 
 [env]
 TERM = "alacritty"
@@ -8,11 +8,9 @@ opacity = 1.0
 decorations = "full"
 dynamic_padding = true
 
-
 [window.padding]
 x = 10
 y = 10
-
 
 [font]
 size = 10
@@ -29,7 +27,7 @@ family = "Noto Sans Mono"
 [font.bold_italic]
 family = "Noto Sans Mono"
 
-# Base16 Darcula 256 - JetBrains-like colors
+# Base16 Darcula Colors
 [colors.primary]
 background = "0x2b2b2b"
 foreground = "0xa9b7c6"
@@ -41,7 +39,6 @@ cursor = "0xa9b7c6"
 [colors.normal]
 black   = "0x2b2b2b"
 red     = "0x4eade5"
-
 green   = "0x6a8759"
 yellow  = "0xbbb529"
 blue    = "0x9876aa"
@@ -55,14 +52,12 @@ red     = "0x4eade5"
 green   = "0x6a8759"
 yellow  = "0xbbb529"
 blue    = "0x9876aa"
-
 magenta = "0xcc7832"
 cyan    = "0x629755"
 white   = "0xffffff"
 
 [[colors.indexed_colors]]
 index = 16
-
 color = "0x689757"
 
 [[colors.indexed_colors]]
@@ -71,7 +66,6 @@ color = "0x808080"
 
 [[colors.indexed_colors]]
 index = 18
-
 color = "0x323232"
 
 [[colors.indexed_colors]]
@@ -80,34 +74,39 @@ color = "0x323232"
 
 [[colors.indexed_colors]]
 index = 20
-
 color = "0xa4a3a3"
 
 [[colors.indexed_colors]]
 index = 21
 color = "0xffc66d"
 
-[keyboard]
-
-[[keyboard.bindings]]
-key = "Key0"
-
-mods = "Control"
-action = "ResetFontSize"
-
-[[keyboard.bindings]]
-key = "Equals"
-mods = "Control"
-action = "IncreaseFontSize"
-
-[[keyboard.bindings]]
-key = "Minus"
-mods = "Control"
-action = "DecreaseFontSize"
-
+[selection]
+save_to_clipboard = true
 
 [terminal.shell]
 program = "wsl.exe"
 args = ["-d", "ArchLinux", "--cd", "~"]
 
+[keyboard]
+bindings = [
+  { key = "Key0", mods = "Control", action = "ResetFontSize" },
+  { key = "Equals", mods = "Control", action = "IncreaseFontSize" },
+  { key = "Minus", mods = "Control", action = "DecreaseFontSize" },
+  { key = "Insert", mods = "Shift", action = "Paste" }
+]
 
+[mouse]
+hide_when_typing = true
+
+[[mouse.bindings]]
+mouse = "Right"
+mods = "Control"
+
+[mouse.bindings.command]
+program = "powershell.exe"
+args = [
+    "-NoProfile",
+    "-STA",
+    "-ExecutionPolicy", "Bypass",
+    "-Command", "$p = Join-Path $env:APPDATA 'alacritty\\wpaste.ps1'; & $p"
+]
